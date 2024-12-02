@@ -1,0 +1,456 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1f1e1e;
+    /* Fondo blanco */
+    color: #ee1858;
+}
+
+/*  header */
+
+/* Header */
+/* Header */
+header {
+    background-color: #000;
+    color: #ee1858;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center; /* Cambiado para centrar el contenido principal */
+    align-items: center;
+    text-align: center;
+}
+
+/* Contenedor del logo */
+.logo {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra el logo horizontalmente */
+    align-items: center; /* Centra el logo verticalmente */
+    background-color: #000;
+}
+
+/* Estilo del logo */
+.logo img {
+    max-width: 160px; /* Tamaño del logo */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+.logo a{
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+.logo a:hover{
+    transform: scale(1.2);
+}
+/* Contenedor para los iconos */
+.icons {
+    display: flex; /* Habilita Flexbox para los iconos */
+    justify-content: flex-end; /* Alinea los iconos a la derecha */
+    align-items: center; /* Centra los iconos verticalmente */
+    flex: 1; /* Permite que el contenedor de iconos tome el espacio necesario */
+}
+
+
+/* Estilo de los iconos en el header */
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icons a {
+    color: #ee1858;
+    text-decoration: none;
+    margin: 0 10px; /* Añade margen horizontal de 10px */
+    font-size: 18px;
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+
+.icons a:hover{
+    transform: scale(1.2); /* Escala el icono al 120% cuando el cursor está sobre él */
+
+}
+.icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+/* Estilo del menú de navegación */
+nav {
+    background-color: #000; /* Fondo negro */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    position: relative; /* Para la animación */
+    z-index: 100; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+nav a {
+    color: #ee1858; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+    margin: 0 15px;
+    font-size: 21px;
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+}
+
+/* Estilo para el estado hover */
+nav a:hover, nav a.active {
+    background-color: rgba(182, 32, 107, 0.1); /* Fondo al pasar el cursor */
+    transform: translateY(-3px); /* Levanta el enlace ligeramente */
+    text-decoration: none; /* Sin subrayado en hover */
+    transform: scale(1.3);
+}
+
+
+/* Estilo del contenido principal */
+
+main {
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main h2{
+    font-size: 50px;
+}
+main p{
+    font-size: 25px;
+    color: #d4cece;
+
+}
+main h2,p {
+    text-align: center;
+}
+/* Estilos comunes para .toys y .lend */
+.toys, .lend {
+    background-size: cover; /* Ajusta la imagen para cubrir el área completa */
+    height: 310px;
+    width: 89%;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    background-position: center; /* Centra la imagen en el div */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    display: flex;
+    flex-direction: column; /* Hace que los elementos se dispongan en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+    font-size: 20px;
+}
+.toys{
+    background-image: url("https://editorialtelevisa.brightspotcdn.com/dims4/default/ec9df04/2147483647/strip/false/crop/1200x672+0+0/resize/1200x672!/quality/90/?url=https%3A%2F%2Fk2-prod-editorial-televisa.s3.us-east-1.amazonaws.com%2Fbrightspot%2F00%2F5b%2F9b57d2154c7c839640614c9bf7d6%2Fcomo-limpiar-de-manera-correcta-tus-juguetes-sexuales.jpg");
+}
+.lend{
+    background-image: url('https://www.chio-lecca.edu.pe/cdn/shop/files/lenceria_chio_lecca_9c56c573-303c-4f4e-a7b2-2121a9bf79bc.jpg?v=1687566740&width=1200');
+}
+
+/* Estilos comunes para títulos */
+.toys-title{
+    font-size: 48px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+.lend-title {
+    font-size: 48px;
+    color: #ff007f;
+    margin-bottom: 10px;
+}
+/* Estilos comunes para subtítulos */
+.toys-subtitle {
+    font-size: 26px;
+    color:#ff007f;
+    margin-bottom: 15px;
+    text-align: center; /* Asegura que el texto esté centrado */
+    line-height: 1.5; /* Establece un interlineado consistente */
+    font-weight: normal; /* Asegura que el grosor de la fuente sea el mismo */
+}
+.lend-subtitle {
+    font-size: 24px;
+    color: #e3dcdc;
+    margin-bottom: 15px;
+    text-align: center; /* Asegura que el texto esté centrado */
+    line-height: 1.5; /* Establece un interlineado consistente */
+    font-weight: normal; /* Asegura que el grosor de la fuente sea el mismo */
+}
+/* Estilos comunes para botones */
+.toys-button, .lend-button {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #333;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    background-image: linear-gradient(145deg, #000, #333);
+}
+
+/* Estilos comunes para botones en estado hover */
+.toys-button:hover, .lend-button:hover {
+    background-color: #333;
+    background-image: linear-gradient(145deg, #333, #000);
+    color: #ff007f;
+    border-color: #ff007f;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+/* Estilos comunes para botones en estado activo */
+.toys-button:active, .lend-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+/* Estilo de la sección carrusel */
+
+.carrusel {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Estilo del footer */
+
+footer {
+    background-color: #000;
+    color: #ee1858;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.footer-section-left {
+    float: left;
+    width: 50%;
+    color:  #ee1858;
+}
+.footer-section-right {
+    float: right;
+    width: 50%;
+    color: #ee1858;
+}
+
+footer a {
+    color: #ee1858;
+    text-decoration: none;
+}
+ footer a:hover {
+    text-decoration: underline;
+ }
+
+ .Icons {
+    width: 100%;
+    text-align: right;
+    gap: 15px;
+ }
+ 
+ .Icons a {
+    color: #ee1858;
+    text-decoration: none;
+    font-size: 18px;
+ }
+
+ .Icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+
+ .copyright{
+    width: 100%;
+    text-align: right;
+    font-size: 14px;
+    color: #ee1858;
+    font-size: 12px;
+    color: #a5a1a1;
+    margin-top: 10px;
+ }
+ .clearfix::after {
+    content: "";
+    display: block;
+    clear:both;
+ }
+
+ .slide {
+    position: relative;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+    margin-top: 26px;
+    width: 100%; /* Asegura que el contenedor principal ocupe el 100% del ancho disponible */
+    height: 100%; /* Asegura que el contenedor principal ocupe el 100% del alto disponible */
+    overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+    position: relative;
+}
+
+.slide-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: calc(400px + 3em);
+}
+
+.slide-open:checked + .slide-item {
+    position: static;
+    opacity: 100;
+}
+
+.slide-item {
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide-item img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que cubra completamente el contenedor */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slide-control {
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    font-size: 40px;
+    height: 40px;
+    line-height: 35px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    text-align: center;
+    width: 40px;
+    z-index: 10;
+}
+
+.slide-control.prev {
+    left: 2%;
+}
+
+.slide-control.next {
+    right: 2%;
+}
+
+.slide-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: #aaaaaa;
+}
+
+.slide-indicador {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.slide-indicador li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.slide-circulo {
+    color: #828282;
+    cursor: pointer;
+    display: block;
+    font-size: 35px;
+}
+
+.slide-circulo:hover {
+    color: #aaaaaa;
+}
+
+#titulo {
+    width: 100%;
+    position: absolute;
+    padding: 0px;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 27px;
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Open Sans', sans-serif;
+    z-index: 9999;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), -1px 0px 2px rgba(255, 255, 255, 0);
+}
+
+
+
+.abajo {
+    height: 300px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    background-color: #f8f8f8; /* Color de fondo */
+    overflow: hidden; /* Para ocultar el texto que sale de la vista */
+    position: relative; /* Para el posicionamiento de la animación */
+}
+
+.text-container {
+    opacity: 0; /* Inicialmente invisible */
+    transform: translateY(100px); /* Desplazado hacia abajo */
+    animation: slide-up 0.6s forwards; /* Llama a la animación */
+    animation-delay: 0.2s; /* Retraso antes de iniciar la animación */
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0; /* Comienza invisible */
+        transform: translateY(100px); /* Desplazado hacia abajo */
+    }
+    to {
+        opacity: 1; /* Se vuelve visible */
+        transform: translateY(0); /* Regresa a la posición original */
+    }
+}
+
+
+
+
+/* Estilo para el logo de sesión */
+#adminButton {
+    display: none;
+    background: url('admin-logo.png') no-repeat center center; /* Agrega la imagen de tu logo de admin */
+    background-size: contain;
+    width: 40px; /* Ajusta el tamaño del logo */
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  #adminButton:hover {
+    transform: scale(1.1); /* Efecto de hover para hacerlo más atractivo */
+  }
+  /* Responsive design: stack pagination on smaller screens */
+@media (max-width: 600px) {
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .pagination a {
+        margin: 5px;
+    }
+}

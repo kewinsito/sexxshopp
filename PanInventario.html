@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="StyleAñBr.css">
+</head>
+<body>
+
+    <div class="logo">
+        <a href="index.html">
+            <img src="loguito.jpeg" alt="Logo">
+        </a>
+    </div>
+    <header>
+        <button onclick="volver()">Volver</button> 
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+
+        <script>
+            function cerrarSesion() {
+                window.location.href = 'index.html';
+            }
+            function volver() {
+                window.location.href = 'PanAdmin.html';              
+            }
+        </script>
+    </header>
+
+    <main>
+        <!-- Campo de búsqueda -->
+        <input type="search" id="search-input" placeholder="Buscar producto..." oninput="buscarProducto()">
+        
+        <button class="inventario" onclick="mostrarTodo()">Mostrar Todo</button>
+        <h2>Inventario de Productos</h2>
+        <div class="product-list-container-inventario">
+            <ul id="inventario"></ul>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="./firebase/firebase.js"></script>
+    <script src="./firebase/auth.js"></script>
+
+    <script>
+        // Mostrar todos los productos
+        function mostrarTodo() {
+            const taskList = document.getElementById('inventario');
+            taskList.innerHTML = '';
+            const colecciones = ['Toys', 'Lenceria', 'Novedades'];
+
+            colecciones.forEach(coleccion => {
+                db.collection(coleccion).get().then(snapshot => {
+                    snapshot.forEach(doc => {
+                        const li = document.createElement('li');
+                        li.className = 'product-card'; 
+                        li.innerHTML = `
+                            <img src="${doc.data().UrlProduct}" alt="${doc.data().nameProduct}" style="width: 100px; height: auto; border-radius: 9px; margin-bottom: 10px;">
+                            <h3>${doc.data().nameProduct}</h3>
+                            <p><strong>Precio:</strong> $${doc.data().precioProduct}</p>
+                            <p><strong>Categoría:</strong> ${coleccion}</p>
+                            <p><strong>Cantidad Disponible:</strong> ${doc.data().cantidadProduct}</p>
+                        `;
+                        li.setAttribute('data-name', doc.data().nameProduct.toLowerCase());  // Guardamos el nombre del producto en minúsculas para la búsqueda
+                        taskList.appendChild(li);
+                    });
+                });
+            });
+        }
+
+        // Buscar productos
+        function buscarProducto() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const taskList = document.getElementById('inventario');
+            const productos = taskList.getElementsByTagName('li');  // Obtener todos los elementos de la lista
+
+            for (let i = 0; i < productos.length; i++) {
+                const producto = productos[i];
+                const nombreProducto = producto.getAttribute('data-name');  // Obtener el nombre guardado en minúsculas
+
+                if (nombreProducto.includes(searchInput)) {
+                    producto.style.display = '';  // Mostrar el producto si coincide
+                } else {
+                    producto.style.display = 'none';  // Ocultar el producto si no coincide
+                }
+            }
+        }
+    </script>
+</body>
+</html>

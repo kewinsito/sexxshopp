@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <link rel="stylesheet" href="stylecarrito.css">
+</head>
+<body>
+    <script src="scriptcarrito.js"></script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar Firebase desde firebase.js
+            // Asegúrate de tener db y auth configurados en firebase.js
+            function iniciarPaginaauth(user) {
+                if (user) {
+                    const userEmailElement = document.getElementById('Correo');
+                    const email = user.email;
+                    const UID = user.uid;
+
+                    userEmailElement.textContent = email.split('@')[0];
+                    mostrarCarrito(UID);
+                } else {
+                    console.log('No hay usuario autenticado.');
+                    // Opcional: redirigir al login
+                }
+            }
+
+            
+           
+
+            
+            
+
+            // Escuchar cambios de autenticación
+            auth.onAuthStateChanged(user => {
+                iniciarPaginaauth(user);
+                
+            });
+        });
+    </script>
+
+    <div class="logo">
+        <a href="index.html">
+            <img src="loguito.jpeg" alt="Logo">
+        </a>
+    </div>
+    <header>
+        <h1 id="Correo"></h1>
+        <!-- Resto del header omitido para brevedad -->
+    </header>
+
+    <div class="container">
+        <h2>Carrito de Compras</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto del producto</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="carrito">
+                
+                <!-- Productos cargados dinámicamente aquí -->
+            </tbody>
+        </table>
+        <div class="subtotal">
+            Subtotal: <strong>$<span id="subtotal">0</span> MXN</strong>
+        </div>
+        <a onclick="irPagar()" class="continue-btn">CONTINUAR</a>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="./firebase/firebase.js"></script>
+</body>
+</html>

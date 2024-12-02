@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="StyleAñBr.css">
+</head>
+<body>
+
+    <div class="logo">
+        <a href="index.html">
+            <img src="loguito.jpeg" alt="Logo">
+        </a>
+    </div>
+    <header>
+        <button onclick="volver()">Volver</button> 
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+
+        <script>
+            function cerrarSesion() {
+                window.location.href = 'index.html';
+            }
+            function volver() {
+                window.location.href = 'PanAdmin.html';              
+            }
+        </script>
+    </header>
+
+    <main>
+        <button class="inventario" onclick="mostrarTodo()">Mostrar Todo</button>
+        <h2>Pedidos de Productos</h2>
+        <div class="product-list-container-inventario">
+            <ul id="pedidos"></ul>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="./firebase/firebase.js"></script>
+    <script src="./firebase/auth.js"></script>
+
+    <script>
+    function mostrarTodo() {
+    const taskList = document.getElementById('pedidos');
+    taskList.innerHTML = '';
+    const colecciones = ['Pedidos'];
+
+    colecciones.forEach(coleccion => {
+        db.collection(coleccion).get().then(snapshot => {
+            snapshot.forEach(async doc => {
+                const pedidoData = doc.data();
+                
+                const li = document.createElement('li');
+                li.className = 'product-card';
+
+                // Plantilla para el pedido
+                li.innerHTML = `
+                    <h3>Pedido: ${doc.id}</h3>
+                    <p><strong>Referencia bancaria:</strong> ${pedidoData.numeroAleatorio || 'error'}</p>
+                    <p><strong>Nombre del Cliente:</strong> ${pedidoData.NameClient || 'Sin nombre'}</p>
+                    <p><strong>Total:</strong> $${pedidoData.total || '0.00'}</p>
+                    <p><strong>Forma de Entrega:</strong> ${pedidoData.formaDentrega ? 'A domicilio' : 'En tienda'}</p>
+                    <p><strong>codigo postal:</strong> ${pedidoData.postalCode || 'No Tiene'}</p>
+                    <p><strong>Dirección:</strong> ${pedidoData.address || 'Sin direccion'}</p>
+                    <p><strong>Telefono:</strong> ${pedidoData.Telefono || '0000000000'}</p>
+                    <h4>Productos:</h4>
+                    <ul id="productos-${doc.id}" class="productos-list">
+                        <li>Cargando productos...</li>
+                    </ul>
+                    <button class="confirmar-btn" data-id="${doc.id}">Confirmar</button>
+                    <button class="eliminar-btn" data-id="${doc.id}">Eliminar</button>
+                `;
+
+                taskList.appendChild(li);
+
+                // Obtener la subcolección 'productos'
+const productosList = document.getElementById(`productos-${doc.id}`);
+const productosSnapshot = await db.collection(coleccion).doc(doc.id).collection('productos').get();
+productosList.innerHTML = ''; // Limpiar el mensaje de carga
+
+// Iterar sobre los documentos de la subcolección 'productos'
+for (const productoDoc of productosSnapshot.docs) {
+    const productoData = productoDoc.data();
+
+    // Buscar el producto en las colecciones especificadas
+    const colecciones = ['Toys', 'Lenceria', 'Novedades'];
+    let productoEncontrado = null;
+
+    for (const coleccion of colecciones) {
+        const productoSnapshot = await db.collection(coleccion).doc(productoData.productoId).get();
+        if (productoSnapshot.exists) {
+            productoEncontrado = productoSnapshot.data();
+            productoEncontrado.categoria = coleccion; // Añadimos la categoría al producto
+            break;
+        }
+    }
+
+    // Si se encuentra el producto, mostrarlo en la lista
+    if (productoEncontrado) {
+        const productoItem = document.createElement('li');
+        productoItem.innerHTML = `
+            <img src="${productoEncontrado.UrlProduct}" alt="${productoEncontrado.nameProduct}" style="width: 100px; height: auto; border-radius: 9px; margin-bottom: 10px;">
+            <p><strong>Producto:</strong> ${productoEncontrado.nameProduct}</p>
+            <p><strong>Precio:</strong> $${productoEncontrado.precioProduct}</p>
+            <p><strong>Categoría:</strong> ${productoEncontrado.categoria}</p>
+            <p><strong>Cantidad:</strong> ${productoData.cantidad}</p>
+        `;
+        productosList.appendChild(productoItem); // Añadir el producto a la lista
+    } else {
+        const productoItem = document.createElement('li');
+        productoItem.innerHTML = `<p><strong>Producto no encontrado:</strong> ID ${productoData.productoId}</p>`;
+        productosList.appendChild(productoItem);
+    }
+}
+
+                let borrar = false;
+                let confirmar = true;
+                // Evento para el botón confirmar
+                const confirmarBtn = li.querySelector('.confirmar-btn');
+                confirmarBtn.addEventListener('click', () => confirmarPedido(doc.id,confirmar));
+                const EliminarBtn = li.querySelector('.eliminar-btn');
+                EliminarBtn.addEventListener('click', () => eliminarPedido(doc.id,borrar));
+            });
+        });
+    });
+}
+
+function eliminarPedido(pedidoID,borraroconf) {
+    if (borraroconf){
+        const pedidoRef = db.collection('Pedidos').doc(pedidoID);
+
+// Obtener la subcolección 'productos'
+    pedidoRef.collection('productos').get()
+    .then(snapshot => {
+        const deletePromises = [];
+
+        // Eliminar todos los documentos de la subcolección
+        snapshot.forEach(doc => {
+            deletePromises.push(pedidoRef.collection('productos').doc(doc.id).delete());
+        });
+
+        // Esperar a que se eliminen los documentos de la subcolección
+        return Promise.all(deletePromises);
+    })
+    .then(() => {
+        // Una vez eliminada la subcolección, eliminar el documento principal
+        return pedidoRef.delete();
+    })
+    .then(() => {
+        //alert('Pedido eliminado correctamente');
+        mostrarTodo(); // Recargar la lista de pedidos
+    })
+    .catch(error => {
+        alert("Error al eliminar el pedido:", error);
+    });
+    }else{
+        
+       if(confirm('¿estas seguro de eliminar el pedido?' )){
+        const pedidoRef = db.collection('Pedidos').doc(pedidoID);
+
+// Obtener la subcolección 'productos'
+pedidoRef.collection('productos').get()
+    .then(snapshot => {
+        const deletePromises = [];
+
+        // Eliminar todos los documentos de la subcolección
+        snapshot.forEach(doc => {
+            deletePromises.push(pedidoRef.collection('productos').doc(doc.id).delete());
+        });
+
+        // Esperar a que se eliminen los documentos de la subcolección
+        return Promise.all(deletePromises);
+    })
+    .then(() => {
+        // Una vez eliminada la subcolección, eliminar el documento principal
+        return pedidoRef.delete();
+    })
+    .then(() => {
+        alert('Pedido eliminado correctamente');
+        mostrarTodo(); // Recargar la lista de pedidos
+    })
+    .catch(error => {
+        alert("Error al eliminar el pedido:", error);
+    });
+       }
+    }
+    
+}
+
+
+function confirmarPedido(pedidoId,borraroconf) {
+    if (confirm(`¿Estás seguro de confirmar el pedido ${pedidoId}?`)) {
+        const pedidoRef = db.collection('Pedidos').doc(pedidoId);
+
+        // Obtener los productos en la subcolección del pedido
+        pedidoRef.collection('productos').get()
+            .then(snapshot => {
+                const updatePromises = [];
+
+                snapshot.forEach(doc => {
+                    const productoData = doc.data();
+                    const productoId = productoData.productoId;
+                    const cantidadPedida = productoData.cantidad;
+
+                    // Buscar el producto en las colecciones
+                    const colecciones = ['Toys', 'Lenceria', 'Novedades'];
+
+                    colecciones.forEach(coleccion => {
+                        updatePromises.push(
+                            db.collection(coleccion).doc(productoId).get().then(productoDoc => {
+                                if (productoDoc.exists) {
+                                    const producto = productoDoc.data();
+                                    const nuevaCantidad = (producto.cantidadProduct || 0) - cantidadPedida;
+
+                                    // Asegurar que no quede negativo
+                                    if (nuevaCantidad >= 0) {
+                                        return db.collection(coleccion).doc(productoId).update({
+                                            cantidadProduct: nuevaCantidad
+                                        });
+                                    } else {
+                                        console.warn(`Stock insuficiente para el producto ${producto.nameProduct} en la colección ${coleccion}`);
+                                    }
+                                }
+                            })
+                        );
+                    });
+                });
+
+                return Promise.all(updatePromises);// Esperar a que todas las actualizaciones de productos se completen
+            })
+            .then(() => {   
+                
+                eliminarPedido(pedidoId,borraroconf);// Eliminar el pedido y su subcolección
+            })
+            .then(() => {
+                alert(`Pedido ${pedidoId} confirmado y eliminado. Cantidades actualizadas.`);
+                mostrarTodo(); // Recargar la lista de pedidos
+            })
+            .catch(error => {
+                console.error(`Error al confirmar el pedido ${pedidoId}:`, error);
+                alert(`Hubo un problema al confirmar el pedido. Por favor, inténtalo de nuevo.`);
+            });
+    }
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+/* Estilo general */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Fondo gris claro */
+  color: #333; /* Color de texto más suave */
+}
+
+/* Estilo del header */
+header {
+  background-color: #000;
+  color: #ee1858;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos al principio y al final */
+  align-items: center;
+  width: 100%;
+}
+
+/* Estilo de los botones del header */
+header button {
+  background-color: #ee1858;
+  color: white;
+  border: 2px solid #ee1858;
+  border-radius: 12px;
+  padding: 8px 16px; /* Ajusta el tamaño del padding */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex: none; /* Evita que los botones se estiren */
+  margin: 0; /* Elimina el espacio extra entre los botones */
+}
+
+/* Efectos de hover, focus y active para los botones */
+header button:hover {
+  background-color: #d0174f; /* Rosa más oscuro */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+header button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(207, 155, 218, 0.5);
+}
+
+header button:active {
+  background-color: #9e0c3e; /* Rosa más oscuro al hacer clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.logo img {
+  max-width: 150px; /* Tamaño más pequeño */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+  transform: scale(1.1); /* Efecto de escala al pasar el cursor */
+}
+
+/* Main */
+main h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+  margin-top: 20px;
+}
+
+main p {
+  font-size: 18px;
+  color: #555; /* Color de texto más suave */
+  text-align: center;
+  margin-top: 10px;
+}
+
+main hr {
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid #ee1858;
+}
+
+/* Contenedor de productos */
+.product-list-container {
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+/* Elemento de cada producto */
+.product-item {
+  background-color: #101010;
+  border: 1px solid #090909;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+/* Evitar margen extra en el último producto */
+.product-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Contenedor y estilo de botones para editar y eliminar */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  align-items: center;
+}
+
+/* Botones de editar y eliminar */
+.edit-btn, .delete-btn {
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  color: #fff;
+}
+
+.edit-btn {
+  background-color: #4caf50; /* Verde */
+}
+
+.edit-btn:hover {
+  background-color: #45a049; /* Verde más oscuro */
+}
+
+.delete-btn {
+  background-color: #f44336; /* Rojo */
+}
+
+.delete-btn:hover {
+  background-color: #e53935; /* Rojo más oscuro */
+}
+
+/* Estilo de los botones del header */
+header .header-buttons {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 15px;
+  padding: 0 20px;
+}
+
+/* Estilo del contenedor principal */
+main {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+main h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+main hr {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+}
+
+
+        /* Botón principal */
+        button.inventario {
+          display: block;
+          margin: 20px auto;
+          background-color:  #ee1858;
+          color: white;
+          border: none;
+          padding: 15px 30px;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      button.inventario:hover {
+          background-color:  #ee1858;
+      }
+
+      /* Diseño de la lista */
+      .product-list-container-inventario {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      .product-card {
+          width: 90%;
+          max-width: 600px;
+          background-color: rgb(0, 0, 0);
+          margin: 10px 0;
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .product-card h3 {
+          margin: 0 0 10px;
+          color:  #9e0c3e;
+      }
+      .product-card p {
+          margin: 5px 0;
+          color: #ffffff;
+      }
+      button {
+        background-color: black; /* Fondo negro */
+        color:  #ee1858; /* Texto rosa */
+        border: 2px solid  #ee1858; /* Borde rosa opcional */
+        border-radius: 5px; /* Bordes redondeados */
+        padding: 10px 20px; /* Espaciado interno */
+        font-size: 16px; /* Tamaño de fuente */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Animación suave */
+    }
+    
+    /* Efecto hover */
+    button:hover {
+        background-color:  #ee1858; /* Fondo cambia a rosa */
+        color: black; /* Texto cambia a negro */
+    }
+    
+
+    /* Diseño de la caja de búsqueda */
+.search-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#search-input {
+  width: 20%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+#search-input:focus {
+  border-color: #ee1858;
+}

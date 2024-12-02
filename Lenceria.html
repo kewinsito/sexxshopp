@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="consolador.jfif" type="image/icon type">
+    <title>Sex Shop</title>
+    <link rel="stylesheet" href="stylelenceria.css">
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="./firebase/firebase.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() { 
+      function iniciarPagina() { 
+        const taskList = document.getElementById('Correo');
+        taskList.innerHTML = '';
+        
+        // Verificar si hay un usuario autenticado
+        const user = auth.currentUser;
+        let userEmail = '';
+        
+        if (user) {
+          // Si hay un usuario autenticado, obtener el correo antes del @
+          const email = user.email;
+          userEmail = email.split('@')[0];
+        } 
+        
+        // Mostrar el correo en el elemento
+        const userEmailElement = document.getElementById('Correo');
+        userEmailElement.textContent = userEmail;
+
+        // Verificar si el usuario es administrador
+        if (user) {
+          const userId = user.uid;
+          const userRef = firebase.firestore().collection('Usuarios').doc(userId);
+          
+          userRef.get().then((doc) => {
+            if (doc.exists && doc.data().admin === true) {
+              // Mostrar el botón de administrador si es admin
+              const adminButton = document.getElementById('adminButton');
+              adminButton.style.display = 'inline-block';
+            } else {
+              // Si no es admin, asegurarse de que el botón esté oculto
+              const adminButton = document.getElementById('adminButton');
+              adminButton.style.display = 'none';
+            }
+          });
+        }
+      }
+      
+      // Escuchar cambios de autenticación
+      auth.onAuthStateChanged((user) => {
+        iniciarPagina();
+      });
+    });
+    </script>
+         <script>
+            document.addEventListener('DOMContentLoaded', function () { 
+              function mostrarProducto(docId) {
+                const container = document.getElementById(docId);
+                container.innerHTML = '';
+          
+                // Obtiene el documento con el ID especificado desde la colección 'Toys'
+                db.collection('Lenceria').doc(docId).get()
+                  .then(doc => {
+                    if (doc.exists) {
+                      const data = doc.data();
+                      const li = document.createElement('p');
+                      const info = document.createElement('div');
+                      info.textContent = `$ ${data.precioProduct}`;
+                      li.appendChild(info);
+                      container.appendChild(li);
+                    } else {
+                      console.error(`No se encontró el documento con ID '${docId}'`);
+                    }
+                  })
+                  .catch(error => {
+                    console.error(`Error al obtener el documento '${docId}': `, error);
+                  });
+              }
+          
+              function iniciarPagina() { 
+                // Llama a mostrarProducto para cada ID y contenedor
+                mostrarProducto('lenceAzul');
+                mostrarProducto('lenceRosa');
+                mostrarProducto('lenceNegro');
+                mostrarProducto('lenceNegroRosa');
+                mostrarProducto('lenceBody');
+                mostrarProducto('lenceTirasN');
+                mostrarProducto('lenceRoja');
+                mostrarProducto('LneceMonoN');
+                mostrarProducto('lenceVerde');
+                mostrarProducto('lenceMonoBlanco');
+                mostrarProducto('lenceRosita');
+                mostrarProducto('lenceNegr');
+                mostrarProducto('disfrazEnfe');
+              }
+              
+              iniciarPagina();
+            });
+          </script>
+    <script src="script.js"></script>
+    <!-- Header con imagen como logo y búsqueda -->
+    <div class="logo">
+        <a href="index.html">
+        <img src="loguito.jpeg" alt="Logo">
+    </a>
+    </div>
+    <header>
+        <h1 id="Correo"></h1>
+        <div class="icons">
+            <input type="search" id="searchInput" placeholder="Buscar productos..." alt="">
+            <a href="javascript:void(0);" id="searchIcon">
+                <!-- Cambia href para evitar recarga -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+        </svg>
+            </a>
+            <a href="InicioSesion.html?#" id="linkIniciarSesion">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+                </svg>
+                <!-- Botón de administrador, inicialmente oculto -->
+    <a href="PanAdmin.html" id="adminButton" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+        </svg>
+    </a>
+                <!--cerrar Sesion-->
+                <a href="#" id="linkCerrarSesion" onclick="cerrarSesion()" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+</a>
+            <a href="Carrito.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/>
+    </svg>
+</a>
+        </div>
+    </header>
+
+    <!-- Menú -->
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="Novedades.html">Novedades</a>
+        <a href="toys.html">Sex Shop</a>
+        <a href="Lenceria.html">Lencería</a>
+        <a href="Conocenos.html">Conócenos</a>
+    </nav>
+    <div class="titulo">
+        
+    </div>
+
+    <nav class="select-container">
+        <label for="product-filter">Filtrar por:</label>
+        <div class="custom-select">
+            <select id="product-filter" onchange="filterProducts(this.value)">
+            <option value="all">Todos los productos</option>
+            <option value="disfraz">Disfraz</option>
+            <option value="lenceria">Lencería</option>
+        </select>
+        </div>
+    </nav>
+
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- lenceria -->
+    <div class="product-list">
+        <div class="container">
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_201911.png?raw=true" 
+                     alt="MultiOrgasmos">
+                <h3>Conjunto de lencería azul</h3>
+                <p class="price" id="lenceAzul">$390.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceAzul')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_202449.png?raw=true" alt="Lubricante anal">
+                <h3>Conjunto lencería rosa</h3>
+                <p class="price" id="lenceRosa">$390.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRosa')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_202032.png?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería negro</h3>
+                <p class="price" id="lenceNegro">c$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceNegro')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_202201.png?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Negro/Rosa</h3>
+                <p class="price" id="lenceNegroRosa">$490.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceNegroRosa')">Añadir a Carrito</button>
+            </div>
+            <!-- lenc-->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_202547.png?raw=true" alt="MultiOrgasmos">
+                <h3>Body Corset Negro</h3>
+                <p class="price" id="lenceBody">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceBody')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_203635.png?raw=true" alt="Lubricante anal">
+                <h3>Conjunto Lencería tiras Negro</h3>
+                <p class="price" id="lenceTirasN">$210.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceTirasN')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0011.jpg?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería Rojo </h3>
+                <p class="price" id="lenceRoja">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRoja')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0022.jpg?raw=true" alt="Black Power">
+                <h3>Enterizo Mono Lencería Negro</h3>
+                <p class="price" id="LneceMonoN">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('LneceMonoN')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceria -->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0029.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Conjunto Lencería Verde Floral</h3>
+                <p class="price" id="lenceVerde">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceVerde')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0063.jpg?raw=true" alt="Lubricante anal">
+                <h3>Enterizo Mono Lencería Blanco</h3>
+                <p class="price" id="lenceMonoBlanco">$250.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceMonoBlanco')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0079.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Rosa</h3>
+                <p class="price" id="lenceRosita">$580.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRosita')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0088.jpg?raw=true" alt="Desensibilizador">
+                <h3> Cordinado Negro </h3>
+                <p class="price" id="lenceNegr">$120.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceNegr')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/134.jpg?raw=true" alt="Lenceria">
+                <h3>Conjunto lencería Modelo 134</h3>
+                <p class="price" id="lence134">$390.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lence134')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/2072.jpg?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería AnimalPrint Modelo 2072</h3>
+                <p class="price" id="lence2072">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lence2072')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/2074bbydoll.jpg?raw=true" alt="Black Power">
+                <h3>Babydoll Negro Modelo2074</h3>
+                <p class="price" id="lence2074">$490.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lence2074')">Añadir a Carrito</button>
+            </div>
+            <!-- lenc-->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Animalprint923046.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Lencería AnimalPrint Modelo 923046</h3>
+                <p class="price" id="lence923046">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lence923046')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/BbydollP500.jpg?raw=true" alt="Lubricante anal">
+                <h3>Babydoll Negro Besitos Modelo P500</h3>
+                <p class="price" id="lenceP500">$310.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceP500')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjunto%20Azul%20.jpg?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería Azul </h3>
+                <p class="price" id="lenceAzulita">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceAzulita')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjunto%20negroligueroletras.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Negro y Ligueros</h3>
+                <p class="price" id="LenceLetras">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('LenceLetras')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceria -->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoLazoMangaGuinda.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Conjunto Lencería Lazo y Mangas Guinda</h3>
+                <p class="price" id="lenceLazoG">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceLazoG')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoLazoMangaa.jpg?raw=true" alt="Lubricante anal">
+                <h3>Conjunto Lencería Lazo y Mangas Negro</h3>
+                <p class="price" id="lenceLazoN">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceLazoN')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoM2182.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Negro Modelo 2182</h3>
+                <p class="price" id="lenceN2182">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceN2182')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoM2182.jpg?raw=true" alt="Desensibilizador">
+                <h3> Conjunto Lencería Rojo Modelo 2182</h3>
+                <p class="price" id="lenceR2182">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceR2182')">Añadir a Carrito</button>
+            </div> 
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoNegroFloresColof.jpg?raw=true" alt="Lenceria">
+                <h3>Conjunto Negro Encaje Flores</h3>
+                <p class="price" id="lenceNFlor">$390.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceNFlor')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoP505.jpg?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería Plus Size P-505</h3>
+                <p class="price" id="lenceP505">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceP505')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoRojoEncajeLigueros.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Rojo Encaje Ligueros</h3>
+                <p class="price" id="lenceREl">$490.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceREl')">Añadir a Carrito</button>
+            </div>
+            <!-- lenc-->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ConjuntoRosa.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Lencería Rosa</h3>
+                <p class="price" id="lenceRoss">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRoss')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjuntocadenamu%C3%B1equeras.jpg?raw=true" alt="Lubricante anal">
+                <h3>Lenceria Negro con Muñequeras</h3>
+                <p class="price" id="lenceMuñ">$310.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceMuñ')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjuntonegromangas.jpg?raw=true" alt="Euforia">
+                <h3>Conjunto Lencería Negro y Mangas </h3>
+                <p class="price" id="lenceVmNA">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceVmNA')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjuntonegrovientre.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Negro y Liguero abdomen</h3>
+                <p class="price" id="LenceAb">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('LenceAb')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceria -->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Conjuntorojo.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Conjunto Lencería Rojo</h3>
+                <p class="price" id="lenceRoji">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRoji')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Encajebesitosfaldita.jpg?raw=true" alt="Lubricante anal">
+                <h3>Conjunto Lencería con Falda Besitos</h3>
+                <p class="price" id="lenceFaldaB">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceFaldaB')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Encajenegroyrojoflores.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Lencería Encaje Negro y Rojo</h3>
+                <p class="price" id="lenceNR">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceNR')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Encajerosaflorarl.jpg?raw=true" alt="Desensibilizador">
+                <h3> Conjunto Lencería Rosa Floral</h3>
+                <p class="price" id="lenceRosaF">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRosaF')">Añadir a Carrito</button>
+            </div>            
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/EnterizoencajecadenasNegro.jpg?raw=true" alt="Lenceria">
+                <h3>Enterizo Encaje y Cadenas</h3>
+                <p class="price" id="lenceEyC">$390.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceEyC')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/EnterizonegroFaldaMariposas.jpg?raw=true" alt="Euforia">
+                <h3>Enterizo Negro Mariposas</h3>
+                <p class="price" id="lenceenteM">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceenteM')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/G1689.jpg?raw=true" alt="Black Power">
+                <h3>Lenceria Modelo G1689</h3>
+                <p class="price" id="lenceG1689">$490.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceG1689')">Añadir a Carrito</button>
+            </div>
+            <!-- lenc-->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Guindaencajelinguero.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Lencería Guinda de Encaje</h3>
+                <p class="price" id="lenceG">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceG')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/M2837Azul.png?raw=true" alt="Lubricante anal">
+                <h3>Lenceria Modelo M2837 Azul</h3>
+                <p class="price" id="lenceM2837a">$310.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceM2837a')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/M2837Negro.png?raw=true" alt="Euforia">
+                <h3>Lenceria Modelo M2837 Negro</h3>
+                <p class="price" id="lenceM2837n">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceM2837n')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/M2837Rojo.png?raw=true" alt="Black Power">
+                <h3>Lenceria Modelo M2837 Rojo</h3>
+                <p class="price" id="lenceM2837r">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceM2837r')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceria -->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/ModeloQX6661.jpg?raw=true" alt="MultiOrgasmos">
+                <h3>Conjunto Lencería Modelo QX6661</h3>
+                <p class="price" id="lenceQX6661">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceQX6661')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/PlumasW619.jpg?raw=true" alt="Lubricante anal">
+                <h3>Conjunto con Plumas Modelo W619</h3>
+                <p class="price" id="lenceW619">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceW619')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/RojoRFORXPANS.jpg?raw=true" alt="Black Power">
+                <h3>Conjunto Rojo Modelo RFORX PANS</h3>
+                <p class="price" id="lenceRFORXPANS">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRFORXPANS')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Rojos.jpg?raw=true" alt="Desensibilizador">
+                <h3> Conjunto Lencería Rojo</h3>
+                <p class="price" id="lenceRo">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceRo')">Añadir a Carrito</button>
+            </div> 
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Sinespaldapavestidos.jpg?raw=true" alt="Euforia">
+                <h3>Enterizo sin Esplada </h3>
+                <p class="price" id="lencesinE">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lencesinE')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/W619blanco.jpg?raw=true" alt="Black Power">
+                <h3>Lenceria Modelo W619 Blanco</h3>
+                <p class="price" id="lenceW619B">$450.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceW619B')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceria -->
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Y9669Blanco.png?raw=true" alt="MultiOrgasmos">
+                <h3>Lenceria Modelo Y9669 Blanco</h3>
+                <p class="price" id="lenceY9669B">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceY9669B')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Y9669Negro.png?raw=true" alt="Lubricante anal">
+                <h3>Lenceria Modelo Y9669 Negro</h3>
+                <p class="price" id="lenceY9669n">$400.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceY9669n')">Añadir a Carrito</button>
+            </div>
+            <div class="product lenceria">
+                <img src="https://github.com/Sandra-8897/p/blob/main/Y9669Rojo.png?raw=true" alt="Black Power">
+                <h3>Lenceria Modelo Y9669 Rojo</h3>
+                <p class="price" id="lenceY9669r">$480.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('lenceY9669r')">Añadir a Carrito</button>
+            </div>
+            <!-- lenceriar -->
+            <div class="product disfraz">
+                <img src="https://github.com/Sandra-8897/p/blob/main/IMG-20241101-WA0007.jpg?raw=true" alt="Desensibilizador">
+                <h3> Disfraz Enfermera </h3>
+                <p class="price" id="disfrazEnfe">$120.000</p>
+                <button class="add-to-cart" onclick="añadirCarritoSS('disfrazEnfe')">Añadir a Carrito</button>
+            </div>
+
+        </div>
+    </div>    
+    </main>
+    </div>
+
+    <div class="pagination">
+        <a href="javascript:void(0);" class="prev" id="prevButton">&laquo; Anterior</a>
+        <a href="javascript:void(0);" class="next" id="nextButton">Siguiente &raquo;</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-section-left">
+            <h2>¿Necesitas información adicional?</h2>
+            <a href="https://api.whatsapp.com/send/?phone=6271063016&text&type=phone_number&app_absent=0">Comunícate vía WhatsApp</a>
+        </div>
+        <div class="footer-section-right">
+            <h2>¿Deseas visitar nuestra tienda física?</h2>
+            <a href="https://www.google.com/maps/dir//33800,+Centro,+33800+Hidalgo+del+Parral,+Chih./@26.9331074,-105.7465811,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x86945184794cce79:0x21a1ce05f4e51042!2m2!1d-105.6641796!2d26.9331313?entry=ttu&g_ep=EgoyMDI0MDkyNS4wIKXMDSoASAFQAw%3D%3D">Ubicación de tienda</a>
+        </div>
+        <div class="Icons">
+            <a href="https://www.facebook.com/p/SexShop-Seduction-100064192802511/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>
+    </a>
+            <a href="https://www.instagram.com/_sex_shop_seduction_/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+        </div>
+        <p class="copyright">© 2024, <a href="https://www.facebook.com/p/SexShop-Seduction-100064192802511/">Sex Shop Seduction</a> by <a href="https://www.facebook.com/abigail.aguirre.98837399">@Abigail Aguirre</a></p>
+    </footer>
+
+    <script>
+        // Filtrado por categoría
+        function filterProducts(category) {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product-list .product');
+
+            products.forEach(product => {
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+                const matchesCategory = (category === 'all' || product.classList.contains(category));
+                const matchesSearch = productName.includes(searchInput);
+
+                if (matchesCategory && matchesSearch) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Búsqueda de productos
+        const searchInput = document.getElementById('searchInput');
+        const searchIcon = document.getElementById('searchIcon');
+
+        // Evento de búsqueda al escribir
+        searchInput.addEventListener('input', function() {
+            filterProducts(document.getElementById('product-filter').value);
+        });
+
+        // Evento de búsqueda al hacer clic en el icono
+        searchIcon.addEventListener('click', function() {
+            filterProducts(document.getElementById('product-filter').value);
+        });
+
+
+
+
+// Seleccionamos todos los productos ya existentes en el HTML
+const productos = document.querySelectorAll('.product-list .container .product');
+
+const productosPorPagina = 16;  // Número de productos a mostrar por vez
+let paginaActual = 0;  // Página inicial
+
+// Función para cargar los productos en la página
+function cargarProductos() {
+    // Ocultar todos los productos
+    productos.forEach(producto => {
+        producto.style.display = 'none';
+    });
+
+    // Mostrar solo los productos correspondientes a la página actual
+    const startIndex = paginaActual * productosPorPagina;
+    const endIndex = startIndex + productosPorPagina;
+
+    // Mostramos los productos de la página actual
+    for (let i = startIndex; i < endIndex && i < productos.length; i++) {
+        productos[i].style.display = 'block';
+    }
+}
+
+// Función para manejar el clic en "Siguiente"
+function cargarSiguiente() {
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+    // Si aún hay más productos por cargar, incrementamos la página actual
+    if (paginaActual < totalPaginas - 1) {
+        paginaActual++;
+        cargarProductos();
+        document.getElementById('prevButton').style.display = 'inline'; // Mostrar "Anterior"
+    }
+
+    // Si ya no hay más productos, ocultamos el botón "Siguiente"
+    if (paginaActual === totalPaginas - 1) {
+        document.getElementById('nextButton').style.display = 'none';
+    }
+}
+
+// Función para manejar el clic en "Anterior"
+function cargarAnterior() {
+    // Si estamos en una página mayor a 0, retrocedemos
+    if (paginaActual > 0) {
+        paginaActual--;
+        cargarProductos();
+    }
+
+    // Si estamos en la primera página, ocultamos el botón "Anterior"
+    if (paginaActual === 0) {
+        document.getElementById('prevButton').style.display = 'none';
+    }
+
+    // Siempre mostramos el botón "Siguiente" cuando retrocedemos
+    document.getElementById('nextButton').style.display = 'inline';
+}
+
+// Cargar los primeros productos al inicio
+cargarProductos();
+
+// Configurar el evento para el botón "Siguiente"
+document.getElementById('nextButton').addEventListener('click', cargarSiguiente);
+
+// Configurar el evento para el botón "Anterior"
+document.getElementById('prevButton').addEventListener('click', cargarAnterior);
+
+// Inicialmente, ocultamos el botón "Anterior" porque estamos en la primera página
+document.getElementById('prevButton').style.display = 'none';
+
+
+
+ 
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

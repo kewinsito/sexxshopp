@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Transferencia</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        form {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group.nu {
+            color: #0056b3;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tiendahid {
+            display: none;
+        }
+
+        #totalDisplay {
+            margin: 15px 0;
+            font-size: 1.4rem;
+            color: #12984a;
+            text-align: center;
+        }
+
+        #Tienda p {
+            background-color: #fdf6ec;
+            padding: 15px;
+            border-left: 4px solid #f50076;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="./firebase/firebase.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Función para obtener parámetros de la URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            // Obtener el valor del total desde la URL
+            const total = getQueryParam('total');
+
+            // Actualizar el contenido de los elementos con el ID 'totalDisplay' y 'total'
+            const totalDisplay = document.getElementById('totalDisplay');
+            const totalLabel = document.getElementById('total');
+
+            if (total) {
+                const totalText = `Total a pagar: $${total} MXN`;
+                if (totalDisplay) totalDisplay.textContent = totalText;
+                if (totalLabel) totalLabel.textContent = `${total} MXN`;
+            } else {
+                if (totalDisplay) totalDisplay.textContent = 'No se recibió el total.';
+                if (totalLabel) totalLabel.textContent = '$0.00 MXN';
+            }
+        });
+    </script>
+
+<h1>Datos de Transferencia y Envío </h1>
+
+<form id="transferForm">
+    <p> Por favor transfiere tu pago a la siguiente cuenta</p>
+    <div class="form-group">
+        <label for="cardNumber">Número de tarjeta</label>
+        <label for="">4152 3142 0909 8774</label>
+    </div>
+
+    <div class="form-group">
+        <label for="bankName">Banco</label>
+        <label for="">BBVA bancomer</label>
+    </div>
+    <div class="form-group">
+        <label for="titular">Titular</label>
+        <label for="">Beatriz Abigail Aguirre Barrón</label>
+    </div>
+
+    <div class="form-group"> 
+        <label for="amount">Monto </label>
+        <label id="total">$</label>
+    </div>
+    <div id="totalDisplay"></div>
+    <p>Has tu pago con la siguiente Referencia bancaria</p>
+    <label for="" id="numero">generando numero...</label>
+    <div class="form-group">
+        <label for="receipt">Subir comprobante de transferencia</label>
+        <input type="file" id="receipt" name="receipt" accept="image/*" >
+    </div>
+
+    <div class="form-group">
+        <label for="deliveryOption">Método de entrega</label>
+        <select id="deliveryOption" name="deliveryOption" required>
+            <option value="Tienda">Recoger en tienda</option>
+            <option value="home">Envío a domicilio</option>
+        </select>
+    </div>
+
+    <div id="Tienda" class="tiendahid">
+        <p>Puede recoger su pedido despúes de realizar el pago en nuestra tienda física. Nos encontramos en la colonia Centro, 33800 Hidalgo del Parral, Chih. En horario de Horario de  9:00am a 7:00pm ¡Gracias por su preferencia!</p>
+        <p>Su número de referencia bancaria es su identificador de pedido.<br>    Recuerde llevar su numero para recogerlo.</p>
+
+    </div>
+
+    <div id="homeAddress" class="hidden">
+        <div class="form-group">
+            <label for="NameClient">Nombre</label>
+            <input type="text" id="NameClient" name="NameClient" placeholder="Nombre completo">
+        </div>
+        <div class="form-group">
+            <label for="address">Dirección</label>
+            <input type="text" id="address" name="address" placeholder="Calle, número, colonia, ciudad">
+        </div>
+        <div class="form-group">
+            <label for="Telefono">Telefono</label>
+            <input type="number" id="Telefono" name="Telefono" placeholder="Telefono móvil" >
+        </div>
+
+        <div class="form-group">
+            <label for="postalCode">Código postal</label>
+            <input type="text" id="postalCode" name="postalCode" placeholder="Código postal">
+        </div>
+    </div>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<script>
+    let UID;
+    document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar Firebase desde firebase.js
+            // Asegúrate de tener db y auth configurados en firebase.js
+            function iniciarPaginaauth(user) {
+                if (user) {
+                    const userEmailElement = document.getElementById('Correo');
+                    const email = user.email;
+                    UID = user.uid;
+                } else {
+                    console.log('No hay usuario autenticado.');
+                    // Opcional: redirigir al login
+                }
+            }
+            // Escuchar cambios de autenticación
+            auth.onAuthStateChanged(user => {
+                iniciarPaginaauth(user);
+                
+            });
+        });
+
+    const deliveryOption = document.getElementById('deliveryOption');
+    const homeAddress = document.getElementById('homeAddress');
+    const transferForm = document.getElementById('transferForm');
+    const Tienda = document.getElementById('Tienda');
+
+    // Declarar número aleatorio como variable global
+    let numeroAleatorio;
+
+   // Función para generar y verificar un número aleatorio único
+async function generarNumeroAleatorio() {
+    let numeroUnicoEncontrado = false;
+
+    while (!numeroUnicoEncontrado) {
+        // Generar un número aleatorio entre 0 y 100000
+        numeroAleatorio = Math.floor(Math.random() * 100001);
+
+        // Verificar si el número existe en la colección 'Pedidos'
+        const snapshot = await db.collection('Pedidos').where('numeroAleatorio', '==', numeroAleatorio).get();
+
+        // Si no se encuentra el número, es único
+        if (snapshot.empty) {
+            numeroUnicoEncontrado = true;
+        }
+    }
+
+    // Mostrar el número generado en la página
+    document.getElementById('numero').textContent = `Número de Referencia generado: ${numeroAleatorio}`;
+    
+    return numeroAleatorio; // Devolver el número único para usarlo posteriormente
+}
+
+// Generar el número aleatorio al cargar la página
+window.onload = async () => {
+    const numeroUnico = await generarNumeroAleatorio();
+    console.log(`Número único generado: ${numeroUnico}`);
+};
+
+    // Mostrar u ocultar campos según la opción seleccionada
+    deliveryOption.addEventListener('change', () => {
+        if (deliveryOption.value === 'home') {
+            homeAddress.classList.remove('hidden');
+        } else {
+            homeAddress.classList.add('hidden');
+        }
+        if (deliveryOption.value === 'Tienda') {
+            Tienda.classList.remove('tiendahid');
+        } else {
+            Tienda.classList.add('tiendahid');
+        }
+    });
+
+// Manejo del formulario
+transferForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Obtener el valor del total desde la URL
+    const total = getQueryParam('total');
+    if (deliveryOption.value === 'home') {
+        const NameClient = document.getElementById('NameClient').value;
+        const address = document.getElementById('address').value;
+        const Telefono = document.getElementById('Telefono').value;
+        const postalCode = document.getElementById('postalCode').value;
+        let formaDentrega = true;
+        let pedidoNew=true;
+
+        if (NameClient === "" || address === "" || Telefono === "" || postalCode === "") {
+            alert("Todos los campos deben estar llenos.");
+        } else {
+            db.collection('Pedidos').add({ NameClient, address, Telefono, postalCode, total, formaDentrega,pedidoNew,numeroAleatorio })
+                .then(async (docRef) => {
+                    alert("Pedido guardado con éxito");
+
+                    const productosSnapshot = await db.collection('carrito').doc(UID).collection('productos').get();
+                    const batch = db.batch();
+
+                    productosSnapshot.forEach(productoDoc => {
+                        const productoData = productoDoc.data();
+                        const productoRef = docRef.collection('productos').doc();
+                        batch.set(productoRef, productoData);
+                    });
+
+                    await batch.commit();
+
+                   // alert("Productos copiados con éxito");
+
+                    const deleteBatch = db.batch();
+                    productosSnapshot.forEach(productoDoc => {
+                        const productoRef = db.collection('carrito').doc(UID).collection('productos').doc(productoDoc.id);
+                        deleteBatch.delete(productoRef);
+                    });
+
+                    return deleteBatch.commit();
+                })
+                .then(() => {
+                    //alert("Carrito eliminado con éxito");
+                    
+                    // Limpiar los campos de entrada
+                    document.getElementById('NameClient').value = '';
+                    document.getElementById('address').value = '';
+                    document.getElementById('Telefono').value = '';
+                    document.getElementById('postalCode').value = '';
+
+                    // Redirigir a index.html
+                    window.location.href = 'index.html';
+                })
+                .catch(error => alert(error.message));
+        }
+    } else {
+        let formaDentrega = false;
+        let pedidoNew=true;
+        db.collection('Pedidos').add({ total, formaDentrega, numeroAleatorio,pedidoNew })
+            .then(async (docRef) => {
+                alert("Pedido guardado con éxito");
+
+                const productosSnapshot = await db.collection('carrito').doc(UID).collection('productos').get();
+                const batch = db.batch();
+
+                productosSnapshot.forEach(productoDoc => {
+                    const productoData = productoDoc.data();
+                    const productoRef = docRef.collection('productos').doc();
+                    batch.set(productoRef, productoData);
+                });
+
+                await batch.commit();
+
+                //alert("Productos copiados con éxito");
+
+                const deleteBatch = db.batch();
+                productosSnapshot.forEach(productoDoc => {
+                    const productoRef = db.collection('carrito').doc(UID).collection('productos').doc(productoDoc.id);
+                    deleteBatch.delete(productoRef);
+                });
+
+                return deleteBatch.commit();
+            })
+            .then(() => {
+                //alert("Carrito eliminado con éxito");
+
+                // Redirigir a index.html
+                window.location.href = 'index.html';
+            })
+            .catch(error => alert(error.message));
+    }
+}
+    );
+</script>
+
+
+</body>
+</html>

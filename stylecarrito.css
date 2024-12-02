@@ -1,0 +1,270 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    /* Fondo blanco */
+    color: #ee1858;
+}
+/* Header */
+header {
+    background-color: #000;
+    color: #ee1858;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center; /* Cambiado para centrar el contenido principal */
+    align-items: center;
+    text-align: center;
+}
+/* Contenedor del logo */
+.logo {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra el logo horizontalmente */
+    align-items: center; /* Centra el logo verticalmente */
+    background-color: #000;
+}
+/* Estilo del logo */
+.logo img {
+    max-width: 160px; /* Tamaño del logo */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+.logo a{
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+.logo a:hover{
+    transform: scale(1.2);
+}
+/* Contenedor para los iconos */
+.icons {
+    display: flex; /* Habilita Flexbox para los iconos */
+    justify-content: flex-end; /* Alinea los iconos a la derecha */
+    align-items: center; /* Centra los iconos verticalmente */
+    flex: 1; /* Permite que el contenedor de iconos tome el espacio necesario */
+}
+
+
+/* Estilo de los iconos en el header */
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icons a {
+    color: #ee1858;
+    text-decoration: none;
+    margin: 0 10px; /* Añade margen horizontal de 10px */
+    font-size: 18px;
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+
+.icons a:hover{
+    transform: scale(1.2); /* Escala el icono al 120% cuando el cursor está sobre él */
+
+}
+.icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+/* Estilo del menú de navegación */
+nav {
+    background-color: #000; /* Fondo negro */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    position: relative; /* Para la animación */
+    z-index: 100; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+nav a {
+    color: #ee1858; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+    margin: 0 15px;
+    font-size: 20px;
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+
+nav a:hover {
+    background-color: rgba(199, 37, 118, 0.1); /* Fondo al pasar el cursor */
+    transform: translateY(-3px); /* Levanta el enlace ligeramente */
+    text-decoration: none; /* Sin subrayado en hover */
+    transform: scale(1.2);
+}
+
+
+/* Estilo del contenido principal */
+
+main {
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main h2{
+    font-size: 50px;
+}
+main p{
+    font-size: 25px;
+    color: #000;
+
+}
+main h2,p {
+    text-align: center;
+}
+/*prueba de estilos*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #e4e3e3;
+}
+h2 {
+    color: #ee1858;
+    text-align: left;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table th, table td {
+    padding: 10px;
+    text-align: left;
+}
+table th {
+    color: #ee1858;
+    font-weight: bold;
+}
+table td {
+    border-bottom: 1px solid #eaeaea;
+}
+.product-name {
+    font-weight: bold;
+}
+.remove-link {
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.subtotal {
+    text-align: right;
+    font-weight: bold;
+}
+.note-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #eaeaea;
+    font-size: 14px;
+}
+.continue-btn {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    float: right;
+}
+
+/*estilo flooter*/
+footer {
+    background-color: #000;
+    color: #ee1858;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.footer-section-left {
+    float: left;
+    width: 50%;
+    color:  #ee1858;
+}
+.footer-section-right {
+    float: right;
+    width: 50%;
+    color: #ee1858;
+}
+
+footer a {
+    color: #ee1858;
+    text-decoration: none;
+}
+ footer a:hover {
+    text-decoration: underline;
+ }
+
+ .Icons {
+    width: 100%;
+    text-align: right;
+    gap: 15px;
+ }
+ 
+ .Icons a {
+    color: #ee1858;
+    text-decoration: none;
+    font-size: 18px;
+ }
+
+ .Icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+
+ .copyright{
+    width: 100%;
+    text-align: right;
+    font-size: 14px;
+    color: #ee1858;
+    font-size: 12px;
+    color: #a5a1a1;
+    margin-top: 10px;
+ }
+ .clearfix::after {
+    content: "";
+    display: block;
+    clear:both;
+ }
+
+
+
+ .formulario-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los inputs */
+    width: 100%; /* Para que los elementos ocupen todo el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo del formulario, opcional */
+    margin: 20px auto; /* Centrar el formulario en la página */
+    gap: 15px; /* Espacio entre los inputs */
+}
+
+.formulario-column input {
+    margin-bottom: 15px; /
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.formulario-column input:last-child {
+    margin-bottom: 0;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador - Sex Shop Seduction</title>
+    <link rel="stylesheet" href="StylePanADM.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>    
+        <div class="logo">
+            <a href="index.html">
+                <img src="loguito.jpeg" alt="Logo">
+            </a>
+        </div>
+        <header>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+        <button onclick="window.location.href='index.html'">Volver</button>
+    </header>
+    </div>
+    <main>
+        <div style="height: 30px; background-color: #000000; margin: 20px 0;">
+
+
+        </div>
+        
+        <div class="panel-container">
+            <div class="añadir panel">
+                <i class="fas fa-plus-circle icon"></i>
+                <h1 class="añadir-title">Añadir</h1>
+                <h3 class="añadir-subtitle">Aquí podrás añadir productos en novedades</h3>
+                <button class="añadir-button" onclick="location.href='PanAñadir.html'">Ir</button>
+            </div>
+                
+            <div class="borMod panel">
+                <i class="fas fa-edit icon"></i>
+                <h1 class="borMod-title">Modificar y Borrar</h1>
+                <h3 class="borMod-subtitle">Aquí podrás modificar o borrar <br>tus productos</h3>
+                <button class="borMod-button" onclick="cargarBorEdi()">Ir</button>
+            </div>
+
+            <div class="stok panel">
+                <i class="fas fa-edit icon"></i>
+                <h1 class="stok-title">Inventario</h1>
+                <h3 class="stok-subtitle">Aquí podrás ver tu inventario <br> de productos</h3>
+                <button class="stok-button" onclick="location.href='PanInventario.html'">Ir</button>
+            </div>
+            <div class="pedidos panel">
+                <i class="fas fa-edit icon"></i>
+                <h1 class="pedidos-title">Pedidos</h1>
+                <h3 class="pedidos-subtitle">Aquí podrás ver los pedidos recibidos</h3>
+                <button class="pedidos-button" onclick="location.href='PanPedido.html'">Ir</button>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="./firebase/firebase.js"></script>
+<script src="./firebase/auth.js"></script>
+<script src="./scriptsesion.js"></script>
+<audio id="alertSound" src="./SD_ALERT_18.mp3"></audio>
+
+<script>
+
+    // Referencia a la colección de pedidos
+    const pedidosRef = db.collection('Pedidos');
+
+    // Listener en tiempo real para detectar nuevos pedidos
+    pedidosRef.where("pedidoNew", "==", true).onSnapshot((snapshot) => {
+        snapshot.forEach((doc) => {
+            const pedido = doc.data();
+            if (pedido.pedidoNew) {
+                 // Obtener el audio
+            const sound = document.getElementById('alertSound');
+
+                // Suena la alerta (puedes personalizar el sonido o usar alert)
+                sound.play();
+
+            // Detener el audio después de 2 segundos
+            setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 0; // Reiniciar el audio
+            }, 1000);
+                alert("¡Nuevo pedido recibido!");
+
+                // Actualiza el campo 'pedidoNew' a false para evitar futuras alertas
+                pedidosRef.doc(doc.id).update({ pedidoNew: false })
+                    .then(() => {
+                        console.log(`Pedido ${doc.id} actualizado a pedidoNew: false`);
+                    })
+                    .catch((error) => {
+                        console.error(`Error al actualizar el pedido: ${error}`);
+                    });
+            }
+        });
+    });
+</script>
+
+</html>

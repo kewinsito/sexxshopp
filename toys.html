@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="consolador.jfif" type="image/icon type">
+    <title>Sex Shop</title>
+    <link rel="stylesheet" href="styletoys.css">
+</head>
+
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { 
+          function iniciarPagina() { 
+            const taskList = document.getElementById('Correo');
+            taskList.innerHTML = '';
+            
+            // Verificar si hay un usuario autenticado
+            const user = auth.currentUser;
+            let userEmail = '';
+            
+            if (user) {
+              // Si hay un usuario autenticado, obtener el correo antes del @
+              const email = user.email;
+              userEmail = email.split('@')[0];
+            } 
+            
+            // Mostrar el correo en el elemento
+            const userEmailElement = document.getElementById('Correo');
+            userEmailElement.textContent = userEmail;
+    
+            // Verificar si el usuario es administrador
+            if (user) {
+              const userId = user.uid;
+              const userRef = firebase.firestore().collection('Usuarios').doc(userId);
+              
+              userRef.get().then((doc) => {
+                if (doc.exists && doc.data().admin === true) {
+                  // Mostrar el botón de administrador si es admin
+                  const adminButton = document.getElementById('adminButton');
+                  adminButton.style.display = 'inline-block';
+                } else {
+                  // Si no es admin, asegurarse de que el botón esté oculto
+                  const adminButton = document.getElementById('adminButton');
+                  adminButton.style.display = 'none';
+                }
+              });
+            }
+          }
+          
+          // Escuchar cambios de autenticación
+          auth.onAuthStateChanged((user) => {
+            iniciarPagina();
+          });
+        });
+        </script>
+         <script>
+            document.addEventListener('DOMContentLoaded', function () { 
+              function mostrarProducto(docId) {
+                const container = document.getElementById(docId);
+                container.innerHTML = '';
+          
+                // Obtiene el documento con el ID especificado desde la colección 'Toys'
+                db.collection('Toys').doc(docId).get()
+                  .then(doc => {
+                    if (doc.exists) {
+                      const data = doc.data();
+                      const li = document.createElement('p');
+                      const info = document.createElement('div');
+                      info.textContent = `$ ${data.precioProduct}`;
+                      li.appendChild(info);
+                      container.appendChild(li);
+                    } else {
+                      console.error(`No se encontró el documento con ID '${docId}'`);
+                    }
+                  })
+                  .catch(error => {
+                    console.error(`Error al obtener el documento '${docId}': `, error);
+                  });
+              }
+          
+              function iniciarPagina() { 
+                // Llama a mostrarProducto para cada ID y contenedor
+                mostrarProducto('kitFeticheNegro');
+                mostrarProducto('setBondage8');
+                mostrarProducto('arnesHueco');
+                mostrarProducto('silenciadorBola');
+                mostrarProducto('latigoMini');
+                mostrarProducto('pluma');
+                mostrarProducto('arnesHermes');
+                mostrarProducto('esposasAndrea');
+                mostrarProducto('dildoDoble');
+                mostrarProducto('dildoMiniAnal');
+                mostrarProducto('dildoConsoladorChupon');
+                mostrarProducto('manoConsolador');
+                mostrarProducto('setDildoArnes');
+                mostrarProducto('consoladorEyaculador');
+                mostrarProducto('consoladorWui');
+                mostrarProducto('consoladorChuponColores');
+                mostrarProducto('consoladorRemoto');
+                mostrarProducto('consoladorAres');
+                mostrarProducto('fundaEngrosadora');
+                mostrarProducto('fundaAlargadora');
+
+                mostrarProducto('engrosadorMasculinoHS');
+                mostrarProducto('lubricanteHempSativa');
+                mostrarProducto('gelLubricanteMulti');
+                mostrarProducto('lubricanteDesensib');
+                mostrarProducto('desensbilizadorAnal');
+                mostrarProducto('sensibilizadorPezones');
+                mostrarProducto('prolongadorMasc');
+                mostrarProducto('bañoburbujas');
+                mostrarProducto('aceiteMasaje');
+                mostrarProducto('lubricante4en1');
+                mostrarProducto('gelVaginalEstrech');
+                mostrarProducto('lubricanteWaterp');
+                mostrarProducto('lubricanteElectricF');
+                mostrarProducto('lubricanteComestible');
+                mostrarProducto('gelLubricanteMultiFresa');
+                mostrarProducto('lubricanteSimul');
+                mostrarProducto('desensbilizadorFresa');
+                mostrarProducto('desensbilizadorMenta');
+                mostrarProducto('desensbilizadorMora');
+                mostrarProducto('retardadorChoco');
+
+                mostrarProducto('vigorizanteHombre');
+                mostrarProducto('vigorizanteMujer');
+                mostrarProducto('plugJoya');
+                mostrarProducto('plugConejo');
+                mostrarProducto('plugZorro');
+                mostrarProducto('plugGato');
+                mostrarProducto('bolitasAnales');
+                mostrarProducto('plugGel');
+                mostrarProducto('vibradorSecc');
+                mostrarProducto('arnesVibrador');
+                mostrarProducto('vibradorGladme');
+                mostrarProducto('vibradorRosa');
+                mostrarProducto('vibradorSeccRosa');
+                mostrarProducto('bolitasVibr2');
+                mostrarProducto('vibradorControl');
+                mostrarProducto('vibradorMulti');
+                mostrarProducto('vibradorLenguita');
+                mostrarProducto('vibradorAmanraya');
+                mostrarProducto('vibradorbrocha');
+                mostrarProducto('vibradorBola');
+                mostrarProducto('vibrador360');
+                mostrarProducto('vibradorEva');
+                mostrarProducto('vibradorInalambrico');
+                mostrarProducto('vibradorTexturas');
+                mostrarProducto('vibradorGel');
+                mostrarProducto('vibradorCrystal');
+                mostrarProducto('lenguitaPig');
+                mostrarProducto('fundaVibra');
+                mostrarProducto('succionadorClit');
+                mostrarProducto('succionadorInalam');
+                mostrarProducto('VibradorCont');
+                mostrarProducto('vibradorRemoto');
+                mostrarProducto('vaginaElectricCup');
+                mostrarProducto('vaginaCup');
+              }
+              
+              iniciarPagina();
+            });
+          </script>
+          
+    
+    <!-- Header con imagen como logo y búsqueda -->
+    <div class="logo">
+        <a href="index.html">
+        <img src="loguito.jpeg" alt="Logo">
+    </a>
+    </div>
+    <header>
+        <h1 id="Correo"></h1>
+        <div class="icons">
+            <input type="search" id="searchInput" placeholder="Buscar productos..." alt="">
+            <a href="javascript:void(0);" id="searchIcon">
+                <!-- Cambia href para evitar recarga -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+        </svg>
+            </a>
+            <a href="InicioSesion.html?#" id="linkIniciarSesion">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+                </svg>
+                <!-- Botón de administrador, inicialmente oculto -->
+    <a href="PanAdmin.html" id="adminButton" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+        </svg>
+    </a>
+                <!--cerrar Sesion-->
+                <a href="#" id="linkCerrarSesion" onclick="cerrarSesion()" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                    </svg>
+</a>
+            <a href="Carrito.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/>
+    </svg>
+</a>
+        </div>
+    </header>
+    <!-- Menú -->
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="Novedades.html">Novedades</a>
+        <a href="toys.html">Sex Shop</a>
+        <a href="Lenceria.html">Lencería</a>
+        <a href="Conocenos.html">Conócenos</a>
+    </nav>
+  
+    
+
+    <nav class="select-container">
+        <label for="product-filter">Filtrar por:</label>
+        <div class="custom-select">
+            <select id="product-filter" onchange="filterProducts(this.value)">
+            <option value="all">Todos los productos</option>
+            <option value="bondage">Bondage</option>
+            <option value="consoladores">Consoladores/Dildos</option>
+            <option value="lubricantes">Lubricantes/Vigorizantes</option>
+            <option value="plugs">Plugs</option>
+            <option value="vibradores">Vibradores</option>
+        </select>
+        </div>
+    </nav>    
+    <!-- Contenido principal -->
+    <main>
+        <!-- BONDAGE -->
+        <div class="product-list">
+            <div class="container">
+                <div class="product bondage">
+                    <a href="VisualizacionProducto.html">
+                <img src="https://github.com/kewinsito/pictur/blob/main/PhotoRoom-20241103_005721.png?raw=true" 
+                 alt="MultiOrgasmos" href="VisualizacionProducto.html">
+                </a>
+                    <h3>Kit Fetiche Negro 4pzs</h3>
+                    <p class="price" id="kitFeticheNegro"></p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('kitFeticheNegro')" >Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/kewinsito/pictur/blob/main/bg850.png?raw=true" alt="Bondage">
+                    <h3>Set Bondage 8pzs</h3>
+                    <p class="price" id="setBondage8"></p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('setBondage8')" >Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_202640.png?raw=true" alt="arnes">
+                    <h3>Arnes Hueco</h3>
+                    <p class="price" id="arnesHueco"></p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('arnesHueco')" >Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_203305.png?raw=true" alt="Bondage bola">
+                    <h3>Silenciador Bola</h3>
+                    <p class="price" id="silenciadorBola"></p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('silenciadorBola')" >Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_203434.png?raw=true" alt="Bondage latigo">
+                    <h3>Latigo Mini 40cm</h3>
+                    <p class="price" id="latigoMini">$240.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('latigoMini')">Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/90.png?raw=true" alt="Bondage pluma">
+                    <h3>Pluma</h3>
+                    <p class="price" id="pluma">$90.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('pluma')">Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_213411.png?raw=true" alt="arnes h">
+                    <h3>Arnes Hermes </h3>
+                    <p class="price" id="arnesHermes">$450.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('arnesHermes')">Añadir a Carrito</button>
+                </div>
+                <div class="product bondage">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_213533.png?raw=true" alt="Bondage esposas">
+                    <h3>Esposas Andrea</h3>
+                    <p class="price" id="esposasAndrea">$480.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('esposasAndrea')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/c400.png?raw=true" alt="dildo doble">
+                    <h3>Dildo Doble Cabeza de gel 25cm * 3cm</h3>
+                    <p class="price" id="dildoDoble">$400.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('dildoDoble')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/160dd.png?raw=true" alt="dildo mini">
+                    <h3>Mini Dildo anal 11.2cm * 2.5cm</h3>
+                    <p class="price" id="dildoMiniAnal">$160.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('dildoMiniAnal')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/chupon.png?raw=true" alt="dildo">
+                    <h3>Dildo Consolador con chupón</h3>
+                    <p class="price" id="dildoConsoladorChupon">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('dildoConsoladorChupon')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/750.png?raw=true" alt="dildo mano">
+                    <h3>Consolador Mano silicón suave y flexible</h3>
+                    <p class="price" id="manoConsolador">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('manoConsolador')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/790.png?raw=true" alt="dildo y arnes">
+                    <h3> Set de Dildo con chupón y Arnés</h3>
+                    <p class="price" id="setDildoArnes">$790.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('setDildoArnes')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_190731.png?raw=true" alt="dildo eya">
+                    <h3>Consolador con Eyaculador</h3>
+                    <p class="price" id="consoladorEyaculador">$000.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('consoladorEyaculador')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/440.png?raw=true" alt="consolador n">
+                    <h3>Consolador</h3>
+                    <p class="price" id="consoladorWui">$440.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('consoladorWui')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/colores.png?raw=true" alt="consolador ch">
+                    <h3>Consolador con chupón colores</h3>
+                    <p class="price" id="consoladorChuponColores">$480.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('consoladorChuponColores')">Añadir a Carrito</button>
+                </div>
+                <!-- LUBR Y VIGORISANTES -->
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_190550.png?raw=true" alt="Consolador">
+                    <h3>Consolador control remoto</h3>
+                    <p class="price" id="consoladorRemoto">$590.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('consoladorRemoto')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_201140.png?raw=true" alt="consolador">
+                    <h3>Consolador Ares</h3>
+                    <p class="price" id="consoladorAres">$490.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('consoladorAres')">Añadir a Carrito</button>
+                </div>
+
+                <!-- fundas consoladoras -->
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/fund240.png?raw=true" alt="vigorisante">
+                    <h3>Funda Engrosadora</h3>
+                    <p class="price" id="fundaEngrosadora">$240.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('fundaEngrosadora')">Añadir a Carrito</button>
+                </div>
+                <div class="product consoladores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/v240.png?raw=true" alt="Lubricante">
+                    <h3>Funda alargadora</h3>
+                    <p class="price" id="fundaAlargadora">$240.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('fundaAlargadora')">Añadir a Carrito</button>
+                </div>
+
+                <!-- LUBR Y VIGORISANTES -->
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/190...png?raw=true" alt="vigorisante">
+                    <h3>Engrosador masculino Hot Sex</h3>
+                    <p class="price" id="engrosadorMasculinoHS">$190.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('engrosadorMasculinoHS')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/200.png?raw=true" alt="Lubricante">
+                    <h3>Lubricante Hemp Sativa</h3>
+                    <p class="price" id="lubricanteHempSativa">$200.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteHempSativa')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/wi160.png?raw=true" alt="Lubricante m">
+                    <h3>Gel Lubricante Multiorgásmico</h3>
+                    <p class="price" id="gelLubricanteMulti">$160.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('gelLubricanteMulti')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/550o.png?raw=true" alt="lubricante d">
+                    <h3>Lubricante Desensilizante anal</h3>
+                    <p class="price" id="lubricanteDesensib">$550.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteDesensib')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product lubricantes">
+                    <a href="VisualizacionProducto.html">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/200k.png?raw=true" 
+                     alt="licricante dd" href="VisualizacionProducto.html">
+                    </a>
+                    <h3>Desensibilizador anal Sueños Húmedos</h3>
+                    <p class="price" id="desensbilizadorAnal">$200.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('desensbilizadorAnal')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/150.png?raw=true" alt="Lubricante anal">
+                    <h3>Sensibilizador Pezones Sueños Húmedos</h3>
+                    <p class="price" id="sensibilizadorPezones">$150.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('sensibilizadorPezones')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/Tt150.png?raw=true" alt="Euforia">
+                    <h3>Prolongador Masculino</h3>
+                    <p class="price" id="prolongadorMasc">c$150.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('prolongadorMasc')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_190106.png?raw=true" alt="Black Power">
+                    <h3>Baño de Burbujas </h3>
+                    <p class="price" id="bañoburbujas">$140.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('bañoburbujas')">Añadir a Carrito</button>
+                </div>
+                <!-- lubg-->
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/180.png?raw=true" alt="Aceite">
+                    <h3>Aceite para Masajes térmico-comestible</h3>
+                    <p class="price" id="aceiteMasaje">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('aceiteMasaje')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/210i.png?raw=true" alt="Lubricante anal">
+                    <h3>Lubricante intimo 4 en 1 efecto térmico</h3>
+                    <p class="price" id="lubricante4en1">$210.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricante4en1')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_211438.png?raw=true" alt="gel">
+                    <h3>Gel Vaginal estrechador </h3>
+                    <p class="price" id="gelVaginalEstrech">$250.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('gelVaginalEstrech')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/240bb.png?raw=true" alt="lubricante">
+                    <h3>Lubricante de silicón waterproof</h3>
+                    <p class="price" id="lubricanteWaterp">$240.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteWaterp')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_195009.png?raw=true" alt="lubricante">
+                    <h3>Lubricante sensibilizador Electric feel</h3>
+                    <p class="price" id="lubricanteElectricF">$400.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteElectricF')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_195237.png?raw=true" alt="Lubricante comestible">
+                    <h3>Lubricante Comestible Love is Love</h3>
+                    <p class="price" id="lubricanteComestible">$250.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteComestible')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/250.png?raw=true" alt="lubricante">
+                    <h3>Lubricante Multiorgásmico sabor fresa</h3>
+                    <p class="price" id="gelLubricanteMultiFresa">$250.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('gelLubricanteMultiFresa')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/280b.png?raw=true" alt="Black Power">
+                    <h3>Lubricante simulador</h3>
+                    <p class="price" id="lubricanteSimul">$280.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lubricanteSimul')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/120.png?raw=true" alt="Desensibilizador">
+                    <h3> Desensibilizador Oral sabor fresa </h3>
+                    <p class="price" id="desensbilizadorFresa">$120.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('desensbilizadorFresa')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_211354.png?raw=true" alt="Desensibilizador">
+                    <h3>Desensibilizador Oral sabor menta</h3>
+                    <p class="price" id="desensbilizadorMenta">$120.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('desensbilizadorMenta')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_211438.png?raw=true" alt="Desensibilizador">
+                    <h3>Desensibilizador Oral sabor mora</h3>
+                    <p class="price" id="desensbilizadorMora">$120.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('desensbilizadorMora')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/h150.png?raw=true" alt="Black Power">
+                    <h3>Lubricante Retardador sabor chocolate</h3>
+                    <p class="price" id="retardadorChoco">$150.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('retardadorChoco')">Añadir a Carrito</button>
+                </div>
+                <!-- Y VIGORISANTES -->
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/480.png?raw=true" alt="MultiOrgasmos">
+                    <h3>Vigorizante para Hombre 60 caps</h3>
+                    <p class="price" id="vigorizanteHombre">$480.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vigorizanteHombre')">Añadir a Carrito</button>
+                </div>
+                <div class="product lubricantes">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/480..png?raw=true" alt="Lubricante anal">
+                    <h3>Vigorizante femenino 60 caps</h3>
+                    <p class="price" id="vigorizanteMujer">$480.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vigorizanteMujer')">Añadir a Carrito</button>
+                </div>
+
+
+
+
+
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_185153.png?raw=true"  alt="MultiOrgasmos" href="VisualizacionProducto.html">
+                            </a>
+                    <h3>Plug Joya</h3>
+                    <p class="price" id="plugJoya">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('plugJoya')">Añadir a Carrito</button>
+                </div>
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/pp290.png?raw=true" alt="Bondage">
+                    <h3>Plug Colita de Conejo</h3>
+                    <p class="price" id="plugConejo">$290.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('plugConejo')">Añadir a Carrito</button>
+                </div>
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/440pp.png?raw=true" alt="arnes">
+                    <h3>Plug Colita Zorro</h3>
+                    <p class="price" id="plugZorro">$280.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('plugZorro')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/P520.png?raw=true" alt="Bondage latigo">
+                    <h3>Plug Colita y Orejitas Gato</h3>
+                    <p class="price" id="plugGato">$520.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('plugGato')">Añadir a Carrito</button>
+                </div>
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/pp195.png?raw=true" alt="Bondage pluma">
+                    <h3>Bolitas anales 26cm * 2.5cm</h3>
+                    <p class="price" id="bolitasAnales">$195.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('bolitasAnales')">Añadir a Carrito</button>
+                </div>
+                <div class="product plugs">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/210pp.png?raw=true" alt="arnes h">
+                    <h3>Plug anal de gel 11.5cm* 2.8cm </h3>
+                    <p class="price" id="plugGel">$210.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('plugGel')">Añadir a Carrito</button>
+                </div>
+                <!-- vibradores -->
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_183613.png?raw=true" alt="dildo doble">
+                    <h3>Vibrador y succionador</h3>
+                    <p class="price" id="vibradorSecc">$1250.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorSecc')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/1290.png?raw=true" alt="dildo mini">
+                    <h3>Arnes con doble vibrador y control </h3>
+                    <p class="price" id="arnesVibrador">$1290.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('arnesVibrador')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/290.png?raw=true" alt="dildo">
+                    <h3>Vibrador Gladme</h3>
+                    <p class="price" id="vibradorGladme">$290.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorGladme')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/b690.png?raw=true" alt="dildo mano">
+                    <h3>Vibrador rosa</h3>
+                    <p class="price" id="vibradorRosa">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorRosa')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_201003.png?raw=true" alt="dildo y arnes">
+                    <h3> Vibrador y succionador Rosa</h3>
+                    <p class="price" id="vibradorSeccRosa">$1290.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorSeccRosa')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/590.png?raw=true" alt="dildo eya">
+                    <h3>Bolitas Vibradoras Set 2</h3>
+                    <p class="price" id="bolitasVibr2">$590.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('bolitasVibr2')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/a690.png?raw=true" alt="consolador n">
+                    <h3>Vibrador a control</h3>
+                    <p class="price" id="vibradorControl">$690.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorControl')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/590...png?raw=true" alt="consolador ch">
+                    <h3>Vibrador Multiusos recargable</h3>
+                    <p class="price" id="vibradorMulti">$590.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorMulti')">Añadir a Carrito</button>
+                </div>
+                <!-- vibradores -->
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/1590iii.png?raw=true" alt="vigorisante">
+                    <h3>Vibrador doble y lenguita clitoris</h3>
+                    <p class="price" id="vibradorLenguita">$1590.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorLenguita')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_201614.png?raw=true" alt="Lubricante">
+                    <h3>Vibrador Remoto Amanraya</h3>
+                    <p class="price" id="vibradorAmanraya">$1590.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorAmanraya')">Añadir a Carrito</button>
+                </div>
+
+
+
+
+
+
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/U790.png?raw=true" alt="Lubricante m">
+                    <h3>Vibrador Brocha</h3>
+                    <p class="price" id="vibradorbrocha">$790.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorbrocha')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/180kkk.png?raw=true" alt="lubricante d">
+                    <h3>Vibrador Balita</h3>
+                    <p class="price" id="vibradorBola">$180.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorBola')">Añadir a Carrito</button>
+                </div>
+
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/hhh690.png?raw=true" alt="dildo y arnes">
+                    <h3> Vibrador 360</h3>
+                    <p class="price" id="vibrador360">$690.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibrador360')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/vv790.png?raw=true" alt="dildo eya">
+                    <h3>Varita Vibradora Eva</h3>
+                    <p class="price" id="vibradorEva">$790.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorEva')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/s1050.png?raw=true" alt="consolador n">
+                    <h3>Vibrador inalámbrico</h3>
+                    <p class="price" id="vibradorInalambrico">$1050.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorInalambrico')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/430vv.png?raw=true" alt="consolador ch">
+                    <h3>Vibrador con texturas</h3>
+                    <p class="price" id="vibradorTexturas">$430.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorTexturas')">Añadir a Carrito</button>
+                </div>
+                <!-- vibradores -->
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/450kkk.png?raw=true" alt="vigorisante">
+                    <h3>Vibrador de gel</h3>
+                    <p class="price" id="vibradorGel">$450.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorGel')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/415.png?raw=true" alt="Lubricante">
+                    <h3>Vibrador Crystal Vibe</h3>
+                    <p class="price" id="vibradorCrystal">$415.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorCrystal')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/vv600.png?raw=true" alt="Lubricante m">
+                    <h3>Lenguita Pig</h3>
+                    <p class="price" id="lenguitaPig">$600.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('lenguitaPig')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/vv450.png?raw=true" alt="lubricante d">
+                    <h3>Funda Vibradora</h3>
+                    <p class="price" id="fundaVibra">$450.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('fundaVibra')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/PhotoRoom-20241101_214255.png?raw=true" alt="dildo y arnes">
+                    <h3> Succionador de clitoris</h3>
+                    <p class="price" id="succionadorClit">$450.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('succionadorClit')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/Fhotos/blob/main/890cc.png?raw=true" alt="dildo eya">
+                    <h3>Succionador inalambricos</h3>
+                    <p class="price" id="succionadorInalam">$890.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('succionadorInalam')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/a690.png?raw=true" alt="consolador n">
+                    <h3>Vibrador a control</h3>
+                    <p class="price" id="VibradorCont">$690.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('VibradorCont')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/PhotoRoom-20241101_190550.png?raw=true" alt="consolador ch">
+                    <h3>Vibrador Consolador remoto</h3>
+                    <p class="price" id="vibradorRemoto">$1290.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vibradorRemoto')">Añadir a Carrito</button>
+                </div>
+                <!-- vibradores -->
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/690..png?raw=true" alt="vigorisante">
+                    <h3>Vagina Electric Cola Cup</h3>
+                    <p class="price" id="vaginaElectricCup">$690.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vaginaElectricCup')">Añadir a Carrito</button>
+                </div>
+                <div class="product vibradores">
+                    <img src="https://github.com/Sandra-8897/p/blob/main/f790.png?raw=true" alt="Lubricante">
+                    <h3>Vagina Cup</h3>
+                    <p class="price" id="vaginaCup">$790.000</p>
+                    <button class="add-to-cart" onclick="añadirCarritoSS('vaginaCup')">Añadir a Carrito</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="pagination">
+        <a href="javascript:void(0);" class="prev" id="prevButton">&laquo; Anterior</a>
+        <a href="javascript:void(0);" class="next" id="nextButton">Siguiente &raquo;</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-section-left">
+            <h2>¿Necesitas información adicional?</h2>
+            <a href="https://api.whatsapp.com/send/?phone=6271063016&text&type=phone_number&app_absent=0">Comunícate vía WhatsApp</a>
+        </div>
+        <div class="footer-section-right">
+            <h2>¿Deseas visitar nuestra tienda física?</h2>
+            <a href="https://www.google.com/maps/dir//33800,+Centro,+33800+Hidalgo+del+Parral,+Chih./@26.9331074,-105.7465811,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x86945184794cce79:0x21a1ce05f4e51042!2m2!1d-105.6641796!2d26.9331313?entry=ttu&g_ep=EgoyMDI0MDkyNS4wIKXMDSoASAFQAw%3D%3D">Ubicación de tienda</a>
+        </div>
+        <div class="Icons">
+            <a href="https://www.facebook.com/p/SexShop-Seduction-100064192802511/">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>
+        </a>
+            <a href="https://www.instagram.com/_sex_shop_seduction_/">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+        </a>
+        </div>
+        <p class="copyright">© 2024, <a href="https://www.facebook.com/p/SexShop-Seduction-100064192802511/">Sex Shop Seduction</a> by <a href="https://www.facebook.com/abigail.aguirre.98837399">@Abigail Aguirre</a></p>
+    </footer>
+
+    <script>
+        // Filtrado por categoría
+        function filterProducts(category) {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product-list .product');
+
+            products.forEach(product => {
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+                const matchesCategory = (category === 'all' || product.classList.contains(category));
+                const matchesSearch = productName.includes(searchInput);
+
+                if (matchesCategory && matchesSearch) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Búsqueda de productos
+        const searchInput = document.getElementById('searchInput');
+        const searchIcon = document.getElementById('searchIcon');
+
+        // Evento de búsqueda al escribir
+        searchInput.addEventListener('input', function() {
+            filterProducts(document.getElementById('product-filter').value);
+        });
+
+        // Evento de búsqueda al hacer clic en el icono
+        searchIcon.addEventListener('click', function() {
+            filterProducts(document.getElementById('product-filter').value);
+        });
+
+// Seleccionamos todos los productos ya existentes en el HTML
+const productos = document.querySelectorAll('.product-list .container .product');
+
+const productosPorPagina = 16;  // Número de productos a mostrar por vez
+let paginaActual = 0;  // Página inicial
+
+// Función para cargar los productos en la página
+function cargarProductos() {
+    // Ocultar todos los productos
+    productos.forEach(producto => {
+        producto.style.display = 'none';
+    });
+
+    // Mostrar solo los productos correspondientes a la página actual
+    const startIndex = paginaActual * productosPorPagina;
+    const endIndex = startIndex + productosPorPagina;
+
+    // Mostramos los productos de la página actual
+    for (let i = startIndex; i < endIndex && i < productos.length; i++) {
+        productos[i].style.display = 'block';
+    }
+}
+
+// Función para manejar el clic en "Siguiente"
+function cargarSiguiente() {
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+    // Si aún hay más productos por cargar, incrementamos la página actual
+    if (paginaActual < totalPaginas - 1) {
+        paginaActual++;
+        cargarProductos();
+        document.getElementById('prevButton').style.display = 'inline'; // Mostrar "Anterior"
+    }
+
+    // Si ya no hay más productos, ocultamos el botón "Siguiente"
+    if (paginaActual === totalPaginas - 1) {
+        document.getElementById('nextButton').style.display = 'none';
+    }
+}
+
+// Función para manejar el clic en "Anterior"
+function cargarAnterior() {
+    // Si estamos en una página mayor a 0, retrocedemos
+    if (paginaActual > 0) {
+        paginaActual--;
+        cargarProductos();
+    }
+
+    // Si estamos en la primera página, ocultamos el botón "Anterior"
+    if (paginaActual === 0) {
+        document.getElementById('prevButton').style.display = 'none';
+    }
+
+    // Siempre mostramos el botón "Siguiente" cuando retrocedemos
+    document.getElementById('nextButton').style.display = 'inline';
+}
+
+// Cargar los primeros productos al inicio
+cargarProductos();
+
+// Configurar el evento para el botón "Siguiente"
+document.getElementById('nextButton').addEventListener('click', cargarSiguiente);
+
+// Configurar el evento para el botón "Anterior"
+document.getElementById('prevButton').addEventListener('click', cargarAnterior);
+
+// Inicialmente, ocultamos el botón "Anterior" porque estamos en la primera página
+document.getElementById('prevButton').style.display = 'none';
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="./firebase/firebase.js"></script>
+</body>
+</html>

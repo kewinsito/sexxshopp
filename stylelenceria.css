@@ -1,0 +1,484 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    /* Fondo blanco */
+    color: #ee1858;
+}
+
+/*  header */
+
+/* Header */
+/* Header */
+header {
+    background-color: #000;
+    color: #ee1858;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center; /* Cambiado para centrar el contenido principal */
+    align-items: center;
+    text-align: center;
+}
+
+/* Contenedor del logo */
+.logo {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra el logo horizontalmente */
+    align-items: center; /* Centra el logo verticalmente */
+    background-color: #000;
+}
+
+/* Estilo del logo */
+.logo img {
+    max-width: 160px; /* Tamaño del logo */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+.logo a{
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+.logo a:hover{
+    transform: scale(1.2);
+}
+/* Contenedor para los iconos */
+.icons {
+    display: flex; /* Habilita Flexbox para los iconos */
+    justify-content: flex-end; /* Alinea los iconos a la derecha */
+    align-items: center; /* Centra los iconos verticalmente */
+    flex: 1; /* Permite que el contenedor de iconos tome el espacio necesario */
+}
+
+
+/* Estilo de los iconos en el header */
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icons a {
+    color: #ee1858;
+    text-decoration: none;
+    margin: 0 10px; /* Añade margen horizontal de 10px */
+    font-size: 18px;
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+
+.icons a:hover{
+    transform: scale(1.2); /* Escala el icono al 120% cuando el cursor está sobre él */
+
+}
+.icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+/* Estilo del menú de navegación */
+nav {
+    background-color: #000; /* Fondo negro */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    position: relative; /* Para la animación */
+    z-index: 100; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+nav a {
+    color: #ee1858; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+    margin: 0 15px;
+    font-size: 20px;
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    display: inline-block; /* Asegura que la animación se aplique correctamente */
+    transition: transform 0.3s ease; /* Animación al pasar el cursor */
+}
+
+nav a:hover {
+    background-color: rgba(199, 37, 118, 0.1); /* Fondo al pasar el cursor */
+    transform: translateY(-3px); /* Levanta el enlace ligeramente */
+    text-decoration: none; /* Sin subrayado en hover */
+    transform: scale(1.3);
+}
+/*diseño del titulo*/
+.titulo{
+    padding: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.titulo h2{
+    font-size: 20px;
+}
+.titulo p{
+    font-size: 25px;
+    color: #ff0073;
+}
+.titulo h2,p{
+    text-align: center;
+}
+
+
+
+/* Estilo del contenido principal */
+
+main {
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main h2{
+    font-size: 50px;
+}
+main p{
+    font-size: 25px;
+    color: #000;
+
+}
+main h2,p {
+    text-align: center;
+}
+
+
+/* Estilo del footer */
+
+footer {
+    background-color: #000;
+    color: #ee1858;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.footer-section-left {
+    float: left;
+    width: 50%;
+    color:  #ee1858;
+}
+.footer-section-right {
+    float: right;
+    width: 50%;
+    color: #ee1858;
+}
+
+footer a {
+    color: #ee1858;
+    text-decoration: none;
+}
+ footer a:hover {
+    text-decoration: underline;
+ }
+
+ .Icons {
+    width: 100%;
+    text-align: right;
+    gap: 15px;
+ }
+ 
+ .Icons a {
+    color: #ee1858;
+    text-decoration: none;
+    font-size: 18px;
+ }
+
+ .Icons svg {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: 24px; /* Ajusta el tamaño del ícono */
+    fill: #ee1858; /* Color rosa */
+}
+
+
+ .copyright{
+    width: 100%;
+    text-align: right;
+    font-size: 14px;
+    color: #ee1858;
+    font-size: 12px;
+    color: #a5a1a1;
+    margin-top: 10px;
+ }
+ .clearfix::after {
+    content: "";
+    display: block;
+    clear:both;
+ }
+ /*diseño del producto, aun falta por probar*/
+ .Producto{
+    border: 1px solid #ddd;
+    padding: 1em;
+    margin: 1em 0;
+    background-color: #fff;
+ }
+ .Producto img {
+    max-width: 100%;
+    height: auto;
+}
+.Producto p{
+    height: auto;
+    width: auto;
+}
+
+/*estilos probando*/
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.product {
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    width: 250px;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+}
+
+.product img {
+    width: 190px;
+    height: 190px;
+    border-radius: 5px;
+}
+
+.product h3 {
+    font-size: 18px;
+    color: #f400a1;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.price span {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 14px;
+}
+
+.add-to-cart {
+    background-color: #ff00ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: #cc00cc;
+}
+
+.offer {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 3px;
+}
+/*select*/
+.select-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* General styles for custom select */
+.custom-select {
+    position: relative;
+    width: 200px;
+    height: 45px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: 2px solid #f400a1;
+    overflow: hidden;
+}
+
+.custom-select select {
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Arrow for custom select */
+.custom-select::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Hover and focus effects */
+.custom-select:hover {
+    border-color: #ff00ff;
+}
+
+.custom-select select:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+/* Optional styling for selected options */
+.custom-select select option {
+    background-color: white;
+    color: #333;
+}
+/*separador para el cambiador de paginas*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Common styles for pagination links */
+.pagination a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Active page */
+.pagination a.active {
+    background-color: #f400a1;
+    color: white;
+    border-color: #f400a1;
+}
+
+/* Hover effect */
+.pagination a:hover {
+    background-color: #ff00ff;
+    color: white;
+    border-color: #ff00ff;
+}
+
+/* Previous and Next buttons */
+.pagination a.prev, .pagination a.next {
+    font-weight: bold;
+    background-color: #e1e1e1;
+}
+
+/* Hover effect for Previous and Next */
+.pagination a.prev:hover, .pagination a.next:hover {
+    background-color: #ff00ff;
+    color: white;
+}
+
+/* Responsive design: stack pagination on smaller screens */
+@media (max-width: 600px) {
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .pagination a {
+        margin: 5px;
+    }
+}
+
+.select-container label {
+    color: white; /* Color de las letras del label */
+}
+
+.custom-select select {
+    background-color: black; /* Fondo negro inicialmente */
+    color: white; /* Letras blancas inicialmente */
+    border: 2px solid black; /* Borde negro */
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+.custom-select select:hover {
+    background-color: #fe007f; /* Fondo rosa al pasar el cursor */
+    color: black; /* Letras negras al pasar el cursor */
+    border-color: #ff0080; /* Borde rosa al pasar el cursor */
+}
+
+.container .product {
+    border: 2px solid #ccc; /* Color de margen inicial */
+    padding: 10px;
+    transition: all 0.3s ease, transform 0.3s ease; /* Transición suave para cambios */
+}
+
+.container .product:hover {
+    border-color: #e90c7b; /* Color del margen al pasar el cursor */
+    transform: scale(1.15);
+}
+
+.container .product:hover h3,
+.container .product:hover .price {
+    color: #000000; /* Cambia el color del texto */
+}
+
+.container .product .add-to-cart {
+    background-color: #000000; /* Color de fondo inicial del botón */
+    color: #faf4f4; /* Color inicial del texto del botón */
+    border: 2px solid #000000; /* Borde inicial del botón */
+    transition: all 0.3s ease; /* Transición suave para cambios */
+}
+
+.container .product:hover .add-to-cart {
+    background-color: #e90c7b; /* Color de fondo del botón al pasar el cursor */
+    color: #e2d8d8; /* Color del texto del botón al pasar el cursor */
+    border-color: #e90c7b; /* Color del borde del botón */
+}
+
+.select-container label {
+    color: white; /* Color de las letras del label */
+}
+
+.custom-select select {
+    background-color: black; /* Fondo negro inicialmente */
+    color: white; /* Letras blancas inicialmente */
+    border: 2px solid black; /* Borde negro */
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+.custom-select select:hover {
+    background-color: #fe007f; /* Fondo rosa al pasar el cursor */
+    color: black; /* Letras negras al pasar el cursor */
+    border-color: #ff0080; /* Borde rosa al pasar el cursor */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
